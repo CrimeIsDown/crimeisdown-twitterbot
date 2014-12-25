@@ -1,5 +1,4 @@
 var fs = require('fs'),
-    proc = require('proc'),
     Twit = require('twit');
 
 var T = null;
@@ -19,10 +18,10 @@ function initConfig() {
             console.error(err);
             // use environment variables
             config = {
-                "consumer_key": proc.env.CONSUMER_KEY,
-                "consumer_secret" : proc.env.CONSUMER_SECRET,
-                "access_token": proc.env.ACCESS_TOKEN,
-                "access_token_secret": proc.env.ACCESS_TOKEN_SECRET
+                "consumer_key": process.env.CONSUMER_KEY,
+                "consumer_secret" : process.env.CONSUMER_SECRET,
+                "access_token": process.env.ACCESS_TOKEN,
+                "access_token_secret": process.env.ACCESS_TOKEN_SECRET
             };
         } else {
             JSON.parse(fileContents);
