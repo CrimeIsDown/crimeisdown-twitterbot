@@ -9,9 +9,9 @@ scanner, to listen in. Currently running on
 For example...
 
 1. [Original
-   tweet](https://twitter.com/EricTendian/status/548228439313223680)
+   tweet](https://twitter.com/EricTendian/status/548250442099326977)
 2. [Bot's
-   retweet](https://twitter.com/CrimeIsDown/status/548228440730914816)
+   retweet](https://twitter.com/CrimeIsDown/status/548250442904666114)
 
 Made with [Node.js](http://nodejs.org/) and the [Twit NPM
 package](https://github.com/ttezel/twit) to interact with Twitter's API.
