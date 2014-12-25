@@ -69,7 +69,7 @@ function retweet(tweet, channel) {
     var statusupdate = 'LISTEN LIVE to ' + channel.name + ' at ' + channel.feedUrl + '/web #ChicagoScanner - RT @' + tweet.user.screen_name + ': ' + tweet.text;
     T.post('statuses/update', {
         status: statusupdate,
-        in_reply_to_status_id: tweet.id
+        in_reply_to_status_id: tweet.id_str
     }, function (err, data, response) {
         if (err) console.error(err);
         console.log(statusupdate);
