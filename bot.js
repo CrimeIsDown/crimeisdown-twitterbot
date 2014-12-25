@@ -15,14 +15,19 @@ function initConfig() {
     fs.readFile('config.json', 'utf-8', function (err, fileContents) {
         var config = null;
         if (err) {
-            console.error(err);
+            console.error('config.json not found, trying environment variables...');
             // use environment variables
-            config = {
-                "consumer_key": process.env.CONSUMER_KEY,
-                "consumer_secret" : process.env.CONSUMER_SECRET,
-                "access_token": process.env.ACCESS_TOKEN,
-                "access_token_secret": process.env.ACCESS_TOKEN_SECRET
-            };
+            try {
+                config = {
+                    "consumer_key": process.env.CONSUMER_KEY,
+                    "consumer_secret" : process.env.CONSUMER_SECRET,
+                    "access_token": process.env.ACCESS_TOKEN,
+                    "access_token_secret": process.env.ACCESS_TOKEN_SECRET
+                };
+            } catch (e) {
+                console.error('Config cound not be loaded, startup cannot continue. Exiting...');
+                process.exit(1);
+            }
         } else {
             JSON.parse(fileContents);
         }
@@ -44,7 +49,10 @@ function initTwit(config) {
 function listen(T) {
     console.log('Initializing bot data and starting stream...');
     fs.readFile('onlinestreams.json', 'utf-8', function (err, fileContents) {
-        if (err) console.error(err);
+        if (err) {
+            console.error('Cannot find online streams data, startup cannot continue. Exiting...');
+            process.exit(1);
+        }
 
         livestreams = JSON.parse(fileContents)
         var stream = T.stream('user', {});
