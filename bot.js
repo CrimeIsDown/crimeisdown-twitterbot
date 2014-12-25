@@ -1,5 +1,6 @@
-var Twit = require('twit'),
-    fs = require('fs');
+var fs = require('fs'),
+    proc = require('proc'),
+    Twit = require('twit');
 
 var T = null;
 
