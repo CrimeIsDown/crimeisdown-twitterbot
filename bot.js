@@ -11,8 +11,19 @@ function start() {
 
 function initConfig() {
     fs.readFile('config.json', 'utf-8', function (err, fileContents) {
-        if (err) throw err;
-        initTwit(JSON.parse(fileContents));
+        var config = null;
+        if (err) {
+            // use environment variables
+            config = {
+                "consumer_key": proc.env.CONSUMER_KEY,
+                "consumer_secret" : proc.env.CONSUMER_SECRET,
+                "access_token": proc.env.ACCESS_TOKEN,
+                "access_token_secret": proc.env.ACCESS_TOKEN_SECRET
+            };
+        } else {
+            JSON.parse(fileContents);
+        }
+        initTwit(config);
     });
 }
 
