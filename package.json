@@ -1,0 +1,27 @@
+{
+  "name": "crimeisdown-twitterbot",
+  "version": "0.1.0",
+  "description": "node.js Twitter bot running on @CrimeIsDown to help report breaking news from the police scanner",
+  "main": "crimeisdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EricTendian/crimeisdown-twitterbot.git"
+  },
+  "keywords": [
+    "twitter",
+    "bot",
+    "twit",
+    "news"
+  ],
+  "author": "EricTendian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricTendian/crimeisdown-twitterbot/issues"
+  },
+  "dependencies": {
+    "twit": "^1.1.18"
+  }
+}
