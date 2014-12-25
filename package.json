@@ -2,8 +2,9 @@
   "name": "crimeisdown-twitterbot",
   "version": "0.1.0",
   "description": "node.js Twitter bot running on @CrimeIsDown to help report breaking news from the police scanner",
-  "main": "crimeisdown.js",
+  "main": "bot.js",
   "scripts": {
+    "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,8 @@
   },
   "dependencies": {
     "twit": "^1.1.18"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
