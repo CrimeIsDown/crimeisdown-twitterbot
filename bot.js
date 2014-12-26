@@ -67,7 +67,7 @@ function listen(T) {
 
 function checkTweet(tweet, livestreams) {
     livestreams.forEach(function (channel, index) {
-        if (tweet.text.toUpperCase().match('^' + channel.shortname + '($| )')) {
+        if (tweet.text.toUpperCase().match('^[' + channel.shortname + '|ZONE ' + channel.shortname.replace('Z', '') + '($| |,)')) {
             retweet(tweet, channel);
         }
     })
