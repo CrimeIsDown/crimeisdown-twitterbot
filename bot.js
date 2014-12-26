@@ -74,7 +74,8 @@ function checkTweet(tweet, livestreams) {
 }
 
 function retweet(tweet, channel) {
-    var statusupdate = 'LISTEN LIVE to ' + (tweet.text.length > 20 ? channel.shortname : channel.name) + ' at ' + channel.feedUrl + '/web #ChicagoScanner - RT @' + tweet.user.screen_name + ': ' + tweet.text;
+    var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
+    var statusupdate = 'LISTEN LIVE to ' + (rt.length > 20 ? channel.shortname : channel.name) + ' at ' + channel.feedUrl + '/web' + (rt.length < 55 ? ' #ChicagoScanner' : '') + rt;
     T.post('statuses/update', {
         status: statusupdate,
         in_reply_to_status_id: tweet.id_str
