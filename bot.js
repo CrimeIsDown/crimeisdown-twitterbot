@@ -67,14 +67,14 @@ function listen(T) {
 
 function checkTweet(tweet, livestreams) {
     livestreams.forEach(function (channel, index) {
-        if (tweet.text.match('^' + channel.shortname + '$')) {
+        if (tweet.text.toUpperCase().match('^' + channel.shortname + '($| )')) {
             retweet(tweet, channel);
         }
     })
 }
 
 function retweet(tweet, channel) {
-    var statusupdate = 'LISTEN LIVE to ' + channel.name + ' at ' + channel.feedUrl + '/web #ChicagoScanner - RT @' + tweet.user.screen_name + ': ' + tweet.text;
+    var statusupdate = 'LISTEN LIVE to ' + (tweet.text.length > 20 ? channel.shortname : channel.name) + ' at ' + channel.feedUrl + '/web #ChicagoScanner - RT @' + tweet.user.screen_name + ': ' + tweet.text;
     T.post('statuses/update', {
         status: statusupdate,
         in_reply_to_status_id: tweet.id_str
