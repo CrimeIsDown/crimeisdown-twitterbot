@@ -1,86 +1,77 @@
 var fs = require('fs'),
     Twit = require('twit');
 
-var T = null;
+var T = null,
+    livestreams = null;
 
 start();
 
 function start() {
     console.log('Initializing bot...');
-    initConfig();
+    initTwit();
 }
 
-function initConfig() {
-    console.log('Initializing config...');
+function end(error) {
+    if (error) console.error(error);
+    process.exit(1);
+}
+
+function initTwit() {
     fs.readFile('config.json', 'utf-8', function (err, fileContents) {
-        var config = null;
         if (err) {
-            console.error('config.json not found, trying environment variables...');
-            // use environment variables
-            try {
-                config = {
+            if (process.env.CONSUMER_KEY && process.env.CONSUMER_SECRET && process.env.ACCESS_TOKEN && process.env.ACCESS_TOKEN_SECRET)
+                T = new Twit({
                     "consumer_key": process.env.CONSUMER_KEY,
                     "consumer_secret" : process.env.CONSUMER_SECRET,
                     "access_token": process.env.ACCESS_TOKEN,
                     "access_token_secret": process.env.ACCESS_TOKEN_SECRET
-                };
-            } catch (e) {
-                console.error('Config cound not be loaded, startup cannot continue. Exiting...');
-                process.exit(1);
+                });
+            } else {
+                end('Config cound not be loaded, startup cannot continue. Exiting...');
             }
         } else {
-            JSON.parse(fileContents);
+            T = new Twit(JSON.parse(fileContents));
         }
-        initTwit(config);
+        listen(T);
     });
-}
-
-function initTwit(config) {
-    console.log('Initializing Twitter API...');
-    T = new Twit({
-        consumer_key:         config.consumer_key,
-        consumer_secret:      config.consumer_secret,
-        access_token:         config.access_token,
-        access_token_secret:  config.access_token_secret
+    fs.readFile('onlinestreams.json', 'utf-8', function (err, fileContents) {
+        if (err) {
+            end('Cannot find online streams data, startup cannot continue. Exiting...');
+        }
+        livestreams = JSON.parse(fileContents);
     });
-    listen(T);
 }
 
 function listen(T) {
-    console.log('Initializing bot data and starting stream...');
-    fs.readFile('onlinestreams.json', 'utf-8', function (err, fileContents) {
-        if (err) {
-            console.error('Cannot find online streams data, startup cannot continue. Exiting...');
-            process.exit(1);
-        }
+    var stream = T.stream('user', {});
 
-        livestreams = JSON.parse(fileContents)
-        var stream = T.stream('user', {});
+    console.log('Bot initialized successfully. Now streaming.');
 
-        console.log('Bot initialized successfully. Now streaming.');
-
-        stream.on('tweet', function (tweet) {
-            checkTweet(tweet, livestreams);
-        });
+    stream.on('tweet', function (tweet) {
+        checkTweet(tweet);
     });
 }
 
-function checkTweet(tweet, livestreams) {
-    livestreams.forEach(function (channel, index) {
-        if (tweet.text.toUpperCase().match('^[' + channel.shortname + '|ZONE ' + channel.shortname.replace('Z', '') + ']($| |,)')) {
-            retweet(tweet, channel);
-        }
-    })
+function checkTweet(tweet) {
+    var matches = tweet.text.toLowerCase().match(/^(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9])))(\D|$)/);
+    if (matches) {
+        retweet(tweet, matches);
+    }
 }
 
-function retweet(tweet, channel) {
+function retweet(tweet, matches) {
     var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
-    var statusupdate = 'LISTEN LIVE to ' + (rt.length > 20 ? channel.shortname : channel.name) + ' at ' + channel.feedUrl + '/web' + (rt.length < 55 ? ' #ChicagoScanner' : '') + rt;
-    T.post('statuses/update', {
-        status: statusupdate,
-        in_reply_to_status_id: tweet.id_str
-    }, function (err, data, response) {
-        if (err) console.error(err);
-        console.log(statusupdate);
-    });
+    if (rt.length < 51) {
+        var channel = livestreams[matches[0].toUpperCase().replace('ZONE ', 'Z').replace('CITYWIDE '), 'CW'];
+        if (channel) {
+            var statusupdate = 'LISTEN LIVE to ' + channel.shortname + ' at ' + channel.feedUrl + '/web' + rt;
+            T.post('statuses/update', {
+                status: statusupdate,
+                in_reply_to_status_id: tweet.id_str
+            }, function (err, data, response) {
+                if (err) console.error(err);
+                console.log(statusupdate);
+            });
+        }
+    }
 }
