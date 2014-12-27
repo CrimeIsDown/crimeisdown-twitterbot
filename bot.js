@@ -62,7 +62,7 @@ function checkTweet(tweet) {
 function retweet(tweet, matches) {
     var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
     if (rt.length < 51) {
-        var channel = livestreams[matches[0].toUpperCase().replace('ZONE ', 'Z').replace('CITYWIDE '), 'CW'];
+        var channel = livestreams[matches[1].toUpperCase().replace('ZONE ', 'Z').replace('CITYWIDE ', 'CW')];
         if (channel) {
             var statusupdate = 'LISTEN LIVE to ' + channel.shortname + ' at ' + channel.feedUrl + '/web' + rt;
             T.post('statuses/update', {
