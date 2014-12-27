@@ -19,7 +19,7 @@ function end(error) {
 function initTwit() {
     fs.readFile('config.json', 'utf-8', function (err, fileContents) {
         if (err) {
-            if (process.env.CONSUMER_KEY && process.env.CONSUMER_SECRET && process.env.ACCESS_TOKEN && process.env.ACCESS_TOKEN_SECRET)
+            if (process.env.CONSUMER_KEY && process.env.CONSUMER_SECRET && process.env.ACCESS_TOKEN && process.env.ACCESS_TOKEN_SECRET) {
                 T = new Twit({
                     "consumer_key": process.env.CONSUMER_KEY,
                     "consumer_secret" : process.env.CONSUMER_SECRET,
