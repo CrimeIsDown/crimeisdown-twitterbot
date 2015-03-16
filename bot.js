@@ -62,7 +62,7 @@ function checkTweet(tweet) {
 function retweet(tweet, matches) {
     var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
     if (rt.length < 51) {
-        var channel = livestreams[matches[1].toUpperCase()
+        var channel = livestreams[matches[0].toUpperCase()
                                             .replace('ZONE ', 'Z')
                                             .replace('CITYWIDE ', 'CW')
                                             .replace('MAIN', 'CFD-Fire')
