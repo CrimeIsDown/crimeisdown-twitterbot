@@ -113,14 +113,14 @@
      },
      "CFD-Fire": {
           "name": "CFD Fire - Main and Englewood, Citywide",
-          "shortname": "CFD-Fire",
+          "shortname": "CFD Fire",
           "description": "Chicago Fire Department (P25 Digital UHF) - MAIN/north &amp; ENGLEWOOD/south, Fire Alarm Offices, including CITYWIDE Fire, radio system. CITYWIDE FIRE is also on the Chicago Fire &amp; EMS Feed! (WPSG 985)  www.ChicagoFD.org",
           "feedUrl": "http://www.broadcastify.com/listen/feed/909",
           "directStreamUrl": "http://relay.broadcastify.com:80/il_chicago_fire2.mp3"
      },
      "CFD-EMS": {
           "name": "CFD EMS - Main and Englewood, EMS Command, CTA Fire. Citywide Fire, Joint Ops",
-          "shortname": "CFD-EMS",
+          "shortname": "CFD EMS",
           "description": "Chicago Fire Department (UHF) CTA-Fire, CITYWIDE Fire, Fire Tac., Joint Ops. Also in (P25 Digital-UHF)  EMS-MAIN/north, EMS-ENGLEWOOD/south &amp; UHF-EMS Command. www.ChicagoFD.org",
           "feedUrl": "http://www.broadcastify.com/listen/feed/13605",
           "directStreamUrl": "http://relay.broadcastify.com:80/836454979.mp3"
