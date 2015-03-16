@@ -53,7 +53,7 @@ function listen(T) {
 }
 
 function checkTweet(tweet) {
-    var matches = tweet.text.toLowerCase().match(/(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9]))|(main))/);
+    var matches = tweet.text.toLowerCase().match(/(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9])))|(^((main)|(englewood))$)/);
     if (matches) {
         retweet(tweet, matches);
     }
@@ -62,7 +62,11 @@ function checkTweet(tweet) {
 function retweet(tweet, matches) {
     var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
     if (rt.length < 51) {
-        var channel = livestreams[matches[1].toUpperCase().replace('ZONE ', 'Z').replace('CITYWIDE ', 'CW').replace('MAIN', 'CFD-Fire')];
+        var channel = livestreams[matches[1].toUpperCase()
+                                            .replace('ZONE ', 'Z')
+                                            .replace('CITYWIDE ', 'CW')
+                                            .replace('MAIN', 'CFD-Fire')
+                                            .replace('ENGLEWOOD', 'CFD-Fire')];
         if (channel) {
             var statusupdate = 'LISTEN LIVE to ' + channel.shortname + ' at ' + channel.feedUrl + '/web' + rt;
             T.post('statuses/update', {
