@@ -23,7 +23,8 @@
     "url": "https://github.com/EricTendian/crimeisdown-twitterbot/issues"
   },
   "dependencies": {
-    "twit": "^1.1.18"
+    "twit": "1.1.x",
+    "async": "1.x.x"
   },
   "engines": {
     "node": "0.10.x"

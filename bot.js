@@ -1,5 +1,6 @@
 var fs = require('fs'),
-    Twit = require('twit');
+    Twit = require('twit'),
+    async = require('async');
 
 var T = null,
     livestreams = null;
@@ -55,12 +56,12 @@ function listen(T) {
 function checkTweet(tweet) {
     var matches = tweet.text.toLowerCase().match(/(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9])))|(^((main)|(englewood))$)/);
     if (matches) {
-        tweet.text.toLowerCase().split(' ').forEach(function (value, key) {
-            if (value.indexOf(matches[0])>0 && value.indexOf('://')>0) {
-                return; // false positive, this is just a link
-            }
+        async.each(tweet.text.toLowerCase().split(' '), function (value, callback) {
+            if (value.indexOf(matches[0])>0 && value.indexOf('://')>0) callback('bad match');
+            else callback();
+        }, function (err) {
+            if (!err) retweet(tweet, matches);
         });
-        retweet(tweet, matches);
     }
 }
 
