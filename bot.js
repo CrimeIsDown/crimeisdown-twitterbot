@@ -49,11 +49,22 @@ function listen(T) {
     console.log('Bot initialized successfully. Now streaming.');
 
     stream.on('tweet', function (tweet) {
-        checkTweet(tweet);
+        checkHashtag(tweet);
+        checkZone(tweet);
     });
 }
 
-function checkTweet(tweet) {
+function checkHashtag(tweet) {
+    var matches = tweet.text.toLowerCase().match(/#crimeisdown/);
+    if (matches) {
+        T.post('statuses/retweet/:id', { id: tweet.id_str }, function (err, data, response) {
+            if (err) console.error(err);
+            // console.log(data);
+        });
+    }
+}
+
+function checkZone(tweet) {
     var matches = tweet.text.toLowerCase().match(/(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9])))|(^((main)|(englewood))$)/);
     if (matches) {
         async.each(tweet.text.toLowerCase().split(' '), function (value, callback) {
