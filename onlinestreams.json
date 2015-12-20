@@ -41,13 +41,6 @@
           "feedUrl": "http://www.broadcastify.com/listen/feed/15380",
           "directStreamUrl": "http://relay.broadcastify.com/527466356.mp3"
      },
-     "Z5": {
-          "name": "CPD Zone 5 - District 2",
-          "shortname": "Zone 5",
-          "description": "2nd District - Wentworth: Serving Douglas, Oakland, Grand Boulevard, Kenwood, Washington Park, and Hyde Park.",
-          "feedUrl": "http://www.broadcastify.com/listen/feed/17691",
-          "directStreamUrl": "http://relay.broadcastify.com/464465203.mp3"
-     },
      "Z6": {
           "name": "CPD Zone 6 - Districts 7 and 8",
           "shortname": "Zone 6",
