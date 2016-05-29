@@ -78,7 +78,7 @@ function checkZone(tweet) {
 
 function retweet(tweet, matches) {
     var rt = '\nhttps://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str;
-    if (tweet.text.length < 31 && rt.toLowerCase().indexOf("spotnewsonig")==-1) {
+    if (tweet.text.length < 31 && tweet.text.toLowerCase().indexOf("spotnewsonig")==-1) {
         var channel = livestreams[matches[0].toUpperCase()
                                             .replace('ZONE ', 'Z')
                                             .replace('CITYWIDE ', 'CW')
