@@ -68,7 +68,7 @@ function checkZone(tweet) {
     var matches = tweet.text.toLowerCase().match(/(((citywide |cw)[1,6])|((zone |z)(1[0-3]|[1-9])))|(^((main)|(englewood))$)/);
     if (matches) {
         async.each(tweet.text.toLowerCase().split(' '), function (value, callback) {
-            if (value.indexOf(matches[0])>0 && value.indexOf('://')>0) callback('bad match');
+            if (value.indexOf(matches[0])>0 && (value.indexOf('://')>0 || value.indexOf('@')===0)) callback('bad match');
             else callback();
         }, function (err) {
             if (!err) retweet(tweet, matches);
@@ -77,8 +77,8 @@ function checkZone(tweet) {
 }
 
 function retweet(tweet, matches) {
-    var rt = ' - RT @' + tweet.user.screen_name + ': ' + tweet.text;
-    if (rt.length < 51 && rt.toLowerCase().indexOf("spotnewsonig")==-1) {
+    var rt = '\nhttps://twitter.com/' + tweet.user.screen_name + '/status/' + tweet.id_str;
+    if (tweet.text.length < 31 && rt.toLowerCase().indexOf("spotnewsonig")==-1) {
         var channel = livestreams[matches[0].toUpperCase()
                                             .replace('ZONE ', 'Z')
                                             .replace('CITYWIDE ', 'CW')
