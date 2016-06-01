@@ -56,7 +56,7 @@ function listen(T) {
 
 function checkHashtag(tweet) {
     var matches = tweet.text.toLowerCase().match(/#crimeisdown/);
-    if (matches) {
+    if (matches && tweet.text.toLowerCase().indexOf("spotnewsonig")==-1 && tweet.user.screen_name.toLowerCase()!=="spotnewsonig") {
         T.post('statuses/retweet/:id', { id: tweet.id_str }, function (err, data, response) {
             if (err) console.error(err);
             // console.log(data);
