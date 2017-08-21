@@ -51,9 +51,9 @@
      "Z4": {
           "name": "CPD Zone 4 - Districts 1 and 18",
           "shortname": "Zone 4",
-          "description": "1st District-Central..18th District-Near North.. Zone cover Downtown Chicago, Lake Shore Drive, Mag Mile, Navy Pier, Central Detention",
-          "feedUrl": "http://www.broadcastify.com/listen/feed/15380",
-          "directStreamUrl": "http://relay.broadcastify.com/527466356.mp3"
+          "description": "Zone 4 is the downtown Chicago and Mag Mile scanner feed. District 1 - Central: Serving the Loop, Near South Side, and the northern part of Douglas. District 18 - Near North: Serving the Near North Side and most of Lincoln Park.",
+          "feedUrl": "http://www.broadcastify.com/listen/feed/26296",
+          "directStreamUrl": "http://relay.broadcastify.com/00g3yv7w49xc.mp3"
      },
      "Z5": {
           "name": "CPD Zone 5 - District 2",
