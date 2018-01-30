@@ -1,6 +1,0 @@
-{
-  "name": "CrimeIsDown Twitter Bot",
-  "description": "Twitter bot running on @CrimeIsDown, automatically tweets/retweets Chicago breaking news from the police scanner",
-  "repository": "https://github.com/EricTendian/crimeisdown-twitterbot",
-  "keywords": ["twitter", "bot", "twit", "news"]
-}
