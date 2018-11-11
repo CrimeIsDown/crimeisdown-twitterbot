@@ -1,6 +1,8 @@
 CrimeIsDown Twitter Bot
 =======================
 
+**NOTE: This bot is currently broken due to [Twitter's recent API restrictions](https://blog.twitter.com/developer/en_us/topics/tools/2017/announcing-more-functionality-to-improve-customer-engagements-on-twitter.html).**
+
 This Twitter bot retweets statuses talking about a certain Chicago
 Police radio zone with the livestream link, allowing anyone, even without a
 scanner, to listen in. Currently running on
